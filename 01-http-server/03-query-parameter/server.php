@@ -5,7 +5,7 @@ $server = new Swoole\Http\Server("127.0.0.1", 9501);
 $server->on("request", function ($request, $response): void {
 
     $name = $request->get['name'] ?? 'Gast';
-
+    print_r($request->get);
     $response->end("Hallo {$name}\n");
 });
 
