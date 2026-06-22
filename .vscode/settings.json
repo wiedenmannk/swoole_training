@@ -1,0 +1,15 @@
+{
+    "editor.formatOnSave": true,
+    "editor.fontWeight": "normal",
+    "editor.fontSize": 14,
+    "html.autoClosingTags": true,
+    "editor.autoClosingBrackets": "always",
+    "editor.autoClosingQuotes": "always",
+    "emmet.includeLanguages": {
+        "php": "html"
+    },
+    "[php]": {
+        "editor.defaultFormatter": "DEVSENSE.phptools-vscode"
+    },
+    "editor.autoIndent": "full"
+}
