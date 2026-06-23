@@ -1,3 +1,7 @@
+<?php
+/** @var string $name */
+?>
+
 <html>
 
 <body>
