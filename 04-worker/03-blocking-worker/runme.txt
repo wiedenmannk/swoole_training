@@ -1,0 +1,11 @@
+in meherern Terminals paralell ausführen
+curl http://127.0.0.1:9501/slow
+curl http://127.0.0.1:9501/debug
+curl http://127.0.0.1:9501/slow
+curl http://127.0.0.1:9501/debug
+curl http://127.0.0.1:9501/slow
+curl http://127.0.0.1:9501/slow
+curl http://127.0.0.1:9501/debug
+curl http://127.0.0.1:9501/slow
+curl http://127.0.0.1:9501/debug
+curl http://127.0.0.1:9501/slow

@@ -8,18 +8,18 @@ if (!is_dir($logDir)) {
 
 $logFile = $logDir . "/access.log";
 
+$logLine = date("Y-m-d H:i:s") . " Server gestartet\n";
+
 file_put_contents(
     $logFile,
-    "Server gestartet\n",
+    $logLine,
     FILE_APPEND
 );
 
 $server = new Swoole\Http\Server("127.0.0.1", 9501);
 
-echo $logFile . PHP_EOL;
-
 $server->on("request", function ($request, $response): void {
-    $response->end("Logging Beispiel\n");
+    $response->end("Logzeile mit Zeitstempel\n");
 });
 
 $server->start();

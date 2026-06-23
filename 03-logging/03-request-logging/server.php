@@ -1,0 +1,45 @@
+<?php
+
+date_default_timezone_set("Europe/Berlin");
+$logDir = __DIR__ . "/logs";
+
+if (!is_dir($logDir)) {
+    mkdir($logDir, 0777, true);
+}
+
+$logFile = $logDir . "/access.log";
+
+$logLine = date("Y-m-d H:i:s") . " Server gestartet\n";
+
+file_put_contents(
+    $logFile,
+    $logLine,
+    FILE_APPEND
+);
+
+$server = new Swoole\Http\Server("127.0.0.1", 9501);
+
+
+$server->on("request", function ($request, $response) use ($logFile): void {
+
+    $method = $request->server["request_method"];
+    $uri = $request->server["request_uri"];
+
+    $logLine =
+        date("Y-m-d H:i:s")
+        . " "
+        . $method
+        . " "
+        . $uri
+        . "\n";
+
+    file_put_contents(
+        $logFile,
+        $logLine,
+        FILE_APPEND
+    );
+
+    $response->end("Request protokolliert\n");
+});
+
+$server->start();
