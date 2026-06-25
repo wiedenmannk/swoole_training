@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Swoole WebSocket Client</title>
+</head>
+
+<body>
+
+    <h2>Swoole WebSocket Demo</h2>
+
+    <button id="connect">Verbinden</button>
+    <button id="disconnect">Trennen</button>
+
+    <br><br>
+
+    <input id="message" type="text" placeholder="Nachricht eingeben">
+
+    <button id="send">Senden</button>
+
+    <hr>
+
+    <pre id="log"></pre>
+
+    <script>
+
+        let socket = null;
+
+        const log = document.getElementById("log");
+
+        function write(message) {
+            log.textContent += message + "\n";
+        }
+
+        document.getElementById("connect").onclick = () => {
+
+            socket = new WebSocket("ws://127.0.0.1:9501");
+
+            // DELTA zu einfachen socket.onopen
+            const name = prompt("Dein Name:");
+
+            socket.onopen = () => {
+
+                socket.send(JSON.stringify({
+                    type: "login",
+                    name: name
+                }));
+
+                write("Verbunden");
+            };
+            /*
+            socket.onopen = () => {
+                write("Verbunden");
+            };
+            */
+
+            socket.onmessage = (event) => {
+                write("Server: " + event.data);
+            };
+
+            socket.onclose = () => {
+                write("Verbindung getrennt");
+            };
+        };
+
+        document.getElementById("disconnect").onclick = () => {
+
+            if (socket) {
+                socket.close();
+            }
+        };
+
+        document.getElementById("send").onclick = () => {
+
+            if (!socket) {
+                return;
+            }
+
+            // alte
+            /*
+            socket.send(
+                document.getElementById("message").value
+            );
+            */
+            // neu
+            socket.send(JSON.stringify({
+
+                type: "message",
+
+                text: document.getElementById("message").value
+
+            }));
+
+            write(
+                "Client: " +
+                document.getElementById("message").value
+            );
+        };
+
+    </script>
+
+</body>
+
+</html>

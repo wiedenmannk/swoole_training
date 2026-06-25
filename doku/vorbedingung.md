@@ -44,8 +44,9 @@ phpize --version
 ## checken ob Swoole vorhanden ist
 php -m | grep -i swoole
 
-## Package Libcurl installieren
+## Packages für Swoole Unterstützung
 sudo apt install -y libcurl4-openssl-dev
+sudo apt install zlib1g-dev
 
 
 ## Swoole installieren
