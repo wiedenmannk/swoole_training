@@ -2,7 +2,7 @@
 
 $server = new Swoole\Http\Server("127.0.0.1", 9501);
 
-$server->on("request", function ($request, $response): void {
+$server->on("request", function (Swoole\Http\Request $request, Swoole\Http\Response $response): void {
     $uri = $request->server["request_uri"];
 
     if ($uri === "/api/status") {
